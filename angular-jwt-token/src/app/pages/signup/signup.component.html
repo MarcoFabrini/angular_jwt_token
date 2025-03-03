@@ -1,0 +1,53 @@
+<div class="container">
+    <div class="card" style="width: 25rem; height: auto">
+      <!-- <div class="imgLogin">
+        <img src="" class="card-img-top" alt="" />
+      </div> -->
+      <div class="card-body">
+        <h5 align="center" class="card-title">Sign Up</h5>
+        <form #signupForm="ngForm">
+          
+          <div class="row">
+              <!-- Full Name -->
+              <div class="mb-3">
+                <label class="form-label">Username</label>
+                <input class="form-control" type="text" [(ngModel)]="signupObj.fullName" name="fullName" placeholder="Your full name" required />
+              </div>
+
+              <!-- Email -->
+              <div class="mb-3">
+                <label class="form-label">Email</label>
+                <input class="form-control" type="email" [(ngModel)]="signupObj.email" name="email" placeholder="example@mail.com" required />
+              </div>
+  
+              <!-- Password -->
+              <div class="mb-3">
+                <label class="form-label">Password</label>
+                <input class="form-control" type="password" [(ngModel)]="signupObj.password" name="password" placeholder="Enter password" required />
+              </div>
+
+              <!-- Repeat Password -->
+          </div>
+  
+          <!-- Submit Button -->
+          <div class="d-flex justify-content-between mt-3">
+            <button class="btn btn-primary" (click)="onSignup()" [disabled]="!signupForm.form.valid">
+              <span class="button__text">Sign Up</span>
+            </button>
+            <a (click)="navigateToLogin()" style="cursor: pointer">
+              Already have an account? Login!
+            </a>
+          </div>
+  
+          <!-- Error Message -->
+          <div style="margin-top: 1rem;">
+            <div align="center" class="alert alert-danger" role="alert" *ngIf="errorMsg">
+              {{errorMsg}}
+            </div>  
+          </div>      
+  
+        </form>
+      </div>
+    </div>
+  </div>
+  

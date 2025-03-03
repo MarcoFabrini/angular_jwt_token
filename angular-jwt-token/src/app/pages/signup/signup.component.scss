@@ -1,0 +1,23 @@
+.container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.imgLogin {
+    display: flex;
+    justify-content: center; /* Centra orizzontalmente */
+    align-items: center; /* Centra verticalmente */
+    width: 100%; /* Assicura che il contenitore occupi tutta la larghezza */
+    height: 100%;    
+  }
+  
+  .imgLogin img {
+    width: 10rem; 
+    height: 10rem;
+    border-radius: 50%; /* Rende l'immagine circolare */
+    object-fit: cover; /* Mantiene il rapporto d'aspetto e riempie il cerchio */
+    display: block; /* Evita spazi indesiderati */
+    margin-top: 10px;
+  }
+  

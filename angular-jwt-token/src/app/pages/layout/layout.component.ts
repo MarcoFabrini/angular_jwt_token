@@ -31,23 +31,27 @@ export class LayoutComponent implements OnInit {
 
   logout() {
     this.authService.logout();
-    this.router.navigate(['/dashboard']); // Naviga alla home dopo il logout
+    this.navigateToHome();
   } // logout
 
   navigateToLogin() {
     this.router.navigate(['/login']);
   } // navigateToLogin
 
-  navigateToDashboard() {
-    this.router.navigate(['/dashboard']);
-  } // navigateToDashboard
-
   navigateToAdminPanel(){
-    
-  }
+    this.router.navigate(['']);
+  }// navigateToAdminPanel
+
+  navigateToHome(){
+    this.router.navigate(['/dashboard/home']);
+  }// navigateToHome
+
+  navigateToProva(){
+    this.router.navigate(['/dashboard/prova']);
+  }// navigateToProva
 
   openMenu() {
     this.opened = !this.opened;
-    this.menuTooltip = this.opened ? 'Close menu' : 'Open menu'; // Aggiorna il testo dinamicamente
-  }
+    this.menuTooltip = this.opened ? 'Close menu' : 'Open menu';
+  }// openMenu
 }// class

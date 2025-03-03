@@ -27,6 +27,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { HomeComponent } from './components/home/home.component';
+import { NotFoundComponent } from './pages/not-found/not-found.component';
+import { ProvaComponent } from './components/prova/prova.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +38,10 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     DashboardComponent,
     LoginComponent,
     SignupComponent,
+    HomeComponent,
+    NotFoundComponent,
+    NotFoundComponent,
+    ProvaComponent,
   ],
   imports: [
     BrowserModule,

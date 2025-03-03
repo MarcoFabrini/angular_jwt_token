@@ -5,7 +5,7 @@
   
     <span class="example-spacer"></span>
 
-    <span class="menu-title" (click)="navigateToDashboard()" matTooltip="Dashboard">
+    <span class="menu-title" (click)="navigateToHome()" matTooltip="Home">
       Angular JWT Token
     </span>
 
@@ -24,6 +24,24 @@
     <mat-drawer mode="side" [opened]="opened">
       <mat-list role="list" class="menu-list">
         <div class="toolbar-space"></div>
+        <!-- Home -->
+        <mat-list-item class="menu-item" (click)="navigateToHome()">
+          <div class="textCenter">
+            <mat-icon matListIcon>home</mat-icon>
+            <span class="menu-text">Home</span>
+          </div>
+        </mat-list-item>
+        
+        <mat-divider></mat-divider>
+
+        <!-- Prova -->
+        <mat-list-item class="menu-item" (click)="navigateToProva()">
+          <div class="textCenter">
+            <mat-icon matListIcon>flag</mat-icon>
+            <span class="menu-text">Prova</span>
+          </div>
+        </mat-list-item>
+
         <mat-divider></mat-divider>
   
         <!-- Spazio vuoto per spingere il Logout in basso -->
@@ -35,7 +53,9 @@
             <span class="menu-text">Admin Panel</span>
           </div>
         </mat-list-item>
+
         <mat-divider></mat-divider>
+
         <!-- Logout -->
         <mat-list-item *ngIf="isLoggedIn" (click)="logout()" class="menu-item logout-item">
           <div class="textCenter">
@@ -47,9 +67,8 @@
       </mat-list>
     </mat-drawer>
   
-
     <mat-drawer-content>
-      <router-outlet></router-outlet>
+      <app-dashboard></app-dashboard>
     </mat-drawer-content>
 
   </mat-drawer-container>

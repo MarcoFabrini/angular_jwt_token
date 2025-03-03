@@ -29,6 +29,11 @@ export class LayoutComponent implements OnInit {
     });
   } // ngOnInit
 
+  openMenu() {
+    this.opened = !this.opened;
+    this.menuTooltip = this.opened ? 'Close menu' : 'Open menu';
+  } // openMenu
+
   logout() {
     this.authService.logout();
     this.navigateToHome();
@@ -38,20 +43,19 @@ export class LayoutComponent implements OnInit {
     this.router.navigate(['/login']);
   } // navigateToLogin
 
-  navigateToAdminPanel(){
-    this.router.navigate(['']);
-  }// navigateToAdminPanel
+  navigateToAdminPanel() {
+    this.router.navigate(['/dashboard/admin']);
+  } // navigateToAdminPanel
 
-  navigateToHome(){
+  navigateToUserOptions() {
+    this.router.navigate(['/dashboard/user']);
+  } // navigateToUserOptions
+
+  navigateToHome() {
     this.router.navigate(['/dashboard/home']);
-  }// navigateToHome
+  } // navigateToHome
 
-  navigateToProva(){
+  navigateToProva() {
     this.router.navigate(['/dashboard/prova']);
-  }// navigateToProva
-
-  openMenu() {
-    this.opened = !this.opened;
-    this.menuTooltip = this.opened ? 'Close menu' : 'Open menu';
-  }// openMenu
-}// class
+  } // navigateToProva
+} // class

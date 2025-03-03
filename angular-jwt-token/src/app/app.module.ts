@@ -32,6 +32,8 @@ import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { ProvaComponent } from './components/prova/prova.component';
 import { UserOptionsComponent } from './components/user-options/user-options.component';
 import { AdminPanelComponent } from './components/admin-panel/admin-panel.component';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatAccordion } from '@angular/material/expansion';
 
 @NgModule({
   declarations: [
@@ -60,6 +62,8 @@ import { AdminPanelComponent } from './components/admin-panel/admin-panel.compon
     MatToolbarModule,
     MatButtonModule,
     MatTooltipModule,
+    MatExpansionModule,
+    MatAccordion
   ],
   providers: [
     provideClientHydration(withEventReplay()),

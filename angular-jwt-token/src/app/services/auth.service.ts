@@ -38,6 +38,9 @@ export class AuthService {
   );
   isAuthenticated$ = this.isAuthenticatedSubject.asObservable();
 
+  private isAdminSubject = new BehaviorSubject<boolean>(false);
+  isAdmin$ = this.isAdminSubject.asObservable();
+
   private currentUserSubject = new BehaviorSubject<any>(null);
   currentUser$ = this.currentUserSubject.asObservable();
 
@@ -63,27 +66,27 @@ export class AuthService {
       );
   } // loginUser
 
-  getAuthenticatedUser(): void {
-    this.http
-      .get<any>(this.API_URL + "/user/users/getAuthenticatedUser")
+  getAuthenticatedUser(): Observable<any> {
+    return this.http
+      .get<any>(`${this.API_URL}/user/users/getAuthenticatedUser`)
       .pipe(
         tap((response) => {
-          console.log('User data received: ', response);
           this.currentUserSubject.next(response);
+          const isAdmin = !!response.authorities?.includes('ROLE_ADMIN');
+          this.isAdminSubject.next(isAdmin);
         }),
         catchError((error) => {
-          console.error('Error in retrieving user data: ', error);
-          this.logout();
-          return of(null);
+          console.error('Errore nel recuperare i dati utente: ', error);
+          return of(null); // Gestisci in modo grazioso
         })
-      )
-      .subscribe();
+      );
   } // getAuthenticatedUser
 
   logout() {
     localStorage.removeItem('authToken');
     this.isAuthenticatedSubject.next(false);
     this.currentUserSubject.next(null);
+    this.isAdminSubject.next(false); // Resetta lo stato di amministratore al logout
   } // logout
 
   signupUser(signupData: SignupRequest): Observable<SignupResponse> {
@@ -120,9 +123,4 @@ export class AuthService {
     return localStorage.getItem('authToken') || '';
   } // getAuthorizationToken
 
-  isAdmin(): Observable<boolean> {
-    return this.currentUser$.pipe(
-      map((user) => !!user?.authorities?.includes('ROLE_ADMIN'))
-    );
-  } // isAdmin
-}// service
+} // service

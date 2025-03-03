@@ -1,1 +1,20 @@
-<p>user-options works!</p>
+<mat-accordion class="headers-align" multi *ngIf="currentUser">
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+            <mat-panel-title> Personal data </mat-panel-title>
+            <mat-panel-description>
+              {{currentUser.fullName}}
+              <mat-icon>account_circle</mat-icon>
+            </mat-panel-description>
+        </mat-expansion-panel-header>
+      
+    <p><strong>Email: </strong> {{ currentUser.email }}</p>
+    <p><strong>Role: </strong> {{ currentUser.role }}</p>
+    <p><strong>Registration Date: </strong> {{ currentUser.createdAt | date:'dd/MM/yyyy' }}</p>
+    <p><strong>Status: </strong> {{ currentUser.active ? "Active" : "Inactive" }}</p>
+    
+    <div *ngIf="!currentUser">
+        <p>Loading user data...</p>
+    </div>
+</mat-expansion-panel>
+  

@@ -1,0 +1,56 @@
+<mat-toolbar>
+    <button mat-icon-button class="example-icon" aria-label="Menu" (click)="openMenu()" [matTooltip]="menuTooltip">
+      <mat-icon>menu_open</mat-icon>
+    </button>
+  
+    <span class="example-spacer"></span>
+
+    <span class="menu-title" (click)="navigateToDashboard()" matTooltip="Dashboard">
+      Angular JWT Token
+    </span>
+
+    <span class="example-spacer"></span>
+
+    <button mat-icon-button class="example-icon" aria-label="Login" *ngIf="!isLoggedIn" (click)="navigateToLogin()" matTooltip="Login">
+      <mat-icon>login</mat-icon>
+    </button>
+  
+    <button mat-icon-button class="example-icon" aria-label="User" *ngIf="isLoggedIn" matTooltip="User Options">
+        <mat-icon>manage_accounts</mat-icon>
+    </button>
+  </mat-toolbar>
+  
+  <mat-drawer-container class="example-container">
+    <mat-drawer mode="side" [opened]="opened">
+      <mat-list role="list" class="menu-list">
+        <div class="toolbar-space"></div>
+        <mat-divider></mat-divider>
+  
+        <!-- Spazio vuoto per spingere il Logout in basso -->
+        <div class="spacer"></div>
+        <!-- Admin Panel -->
+        <mat-list-item *ngIf="isAdmin" class="menu-item">
+          <div class="textCenter">
+            <mat-icon matListIcon>admin_panel_settings</mat-icon>
+            <span class="menu-text">Admin Panel</span>
+          </div>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <!-- Logout -->
+        <mat-list-item *ngIf="isLoggedIn" (click)="logout()" class="menu-item logout-item">
+          <div class="textCenter">
+            <mat-icon matListIcon>logout</mat-icon>
+            <span class="menu-text">Logout</span>
+          </div>
+        </mat-list-item>
+        
+      </mat-list>
+    </mat-drawer>
+  
+
+    <mat-drawer-content>
+      <router-outlet></router-outlet>
+    </mat-drawer-content>
+
+  </mat-drawer-container>
+  

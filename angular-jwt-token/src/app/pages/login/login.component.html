@@ -1,0 +1,51 @@
+<div class="container">
+    <div class="card" style="width: 25rem; height: auto">
+      <!-- <div>
+        <div class="imgLogin">
+          <img src="" class="card-img-top" alt="" />
+        </div>
+      </div> -->
+      <div class="card-body">
+        <h5 align="center" class="card-title">Login</h5>
+        <form action="">
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">
+              Email address
+            </label>
+            <input class="form-control" id="exampleInputEmail1" type="email" name="email" [(ngModel)]="loginObj.email" placeholder="exemple@mail.com"/>
+          </div>
+
+          <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">
+                Password
+            </label>
+            <input class="form-control" id="exampleInputPassword" type="password" name="password" [(ngModel)]="loginObj.password" placeholder="Enter your password..."/>
+          </div>
+
+          <div align="left">
+            <div align="left">
+              <button class="btn btn-primary" (click)="onLogin()">
+                <span class="button__text">Log In</span><i class="button__icon fas fa-chevron-right"></i>
+              </button>
+            </div>
+
+            <br>
+            
+            <div align="right">
+              <a (click)="navigateToSignup()" style="cursor: pointer">
+                Don't have an account? Sign up now!
+              </a>
+            </div>
+
+            <div style="margin-top: 1rem">
+              <div align="center" class="alert alert-danger" role="alert" *ngIf="errorMsg">
+                {{ errorMsg }}
+              </div>
+            </div>
+            
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  

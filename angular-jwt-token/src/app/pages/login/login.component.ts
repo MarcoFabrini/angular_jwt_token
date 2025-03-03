@@ -27,7 +27,7 @@ export class LoginComponent {
       next: (response) => {
         if (response.token) {
           this.errorMsg = null;
-          this.router.navigateByUrl('/dashboard');
+          this.router.navigateByUrl('/dashboard/home');
         } else {
           this.errorMsg = response.description || 'Invalid email or password';
         }

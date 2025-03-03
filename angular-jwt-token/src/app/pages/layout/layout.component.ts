@@ -29,25 +29,33 @@ export class LayoutComponent implements OnInit {
     });
   } // ngOnInit
 
+  openMenu() {
+    this.opened = !this.opened;
+    this.menuTooltip = this.opened ? 'Close menu' : 'Open menu';
+  } // openMenu
+
   logout() {
     this.authService.logout();
-    this.router.navigate(['/dashboard']); // Naviga alla home dopo il logout
+    this.navigateToHome();
   } // logout
 
   navigateToLogin() {
     this.router.navigate(['/login']);
   } // navigateToLogin
 
-  navigateToDashboard() {
-    this.router.navigate(['/dashboard']);
-  } // navigateToDashboard
+  navigateToAdminPanel() {
+    this.router.navigate(['/dashboard/admin']);
+  } // navigateToAdminPanel
 
-  navigateToAdminPanel(){
-    
-  }
+  navigateToUserOptions() {
+    this.router.navigate(['/dashboard/user']);
+  } // navigateToUserOptions
 
-  openMenu() {
-    this.opened = !this.opened;
-    this.menuTooltip = this.opened ? 'Close menu' : 'Open menu'; // Aggiorna il testo dinamicamente
-  }
-}// class
+  navigateToHome() {
+    this.router.navigate(['/dashboard/home']);
+  } // navigateToHome
+
+  navigateToProva() {
+    this.router.navigate(['/dashboard/prova']);
+  } // navigateToProva
+} // class

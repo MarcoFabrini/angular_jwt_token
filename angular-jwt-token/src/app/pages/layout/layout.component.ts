@@ -22,11 +22,10 @@ export class LayoutComponent implements OnInit {
     // Sottoscrive al BehaviorSubject per aggiornare la navbar dinamicamente
     this.authService.isAuthenticated$.subscribe((isAuth) => {
       this.isLoggedIn = isAuth;
-    });
-
-    // Controlla se l'utente è admin
-    this.authService.isAdmin$.subscribe((isAdmin) => {
-      this.isAdmin = isAdmin;
+      // Controlla se l'utente è admin
+      this.authService.isAdmin$.subscribe((isAdmin) => {
+        this.isAdmin = isAdmin;
+      });
     });
   } // ngOnInit
 

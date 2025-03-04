@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
+import { User } from '../../models/user';
+import { firstValueFrom } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -9,7 +11,12 @@ export class AdminService {
 
   constructor(private http: HttpClient) {}
 
-  listAllUsers() {
-    return this.http.get(this.API_URL + '/admin/users/listAllUsers');
+  listAllUsers(): Promise<Array<User>> {
+    return firstValueFrom(
+      this.http.get<Array<User>>(this.API_URL + '/admin/users/listAllUsers')
+    ).catch((error) => {
+      console.error('Error fetching users:', error);
+      throw error;
+    });
   } // listAllUsers
 } // service

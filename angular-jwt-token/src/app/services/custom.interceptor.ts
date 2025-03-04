@@ -6,7 +6,7 @@ export const customInterceptor: HttpInterceptorFn = (req, next) => {
   const token = typeof window !== 'undefined' ? localStorage.getItem('authToken') : null;
 
   // Log per debug: mostra se il token è presente
-  console.log('Interceptor attivato, token: ', token);
+  //console.log('Interceptor attivato, token: ', token);
 
   // Se non esiste un token, invia la richiesta originale senza modifiche
   if (!token) {
@@ -21,7 +21,7 @@ export const customInterceptor: HttpInterceptorFn = (req, next) => {
   });
 
   // Log per debug: indica che la richiesta è stata modificata
-  console.log('Nuova richiesta con interceptor: ', newReq);
+  //console.log('Nuova richiesta con interceptor: ', newReq);
 
   return next(newReq); // Passa la nuova richiesta con l'header aggiornato
 };

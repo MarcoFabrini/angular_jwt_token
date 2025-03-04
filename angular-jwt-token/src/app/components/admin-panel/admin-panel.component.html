@@ -1,1 +1,39 @@
-<p>admin-panel works!</p>
+
+<mat-accordion class="headers-align" multi>
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <mat-icon>group</mat-icon>
+            <div class="space-mat-panel">
+              List users
+            </div>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <mat-accordion class="headers-align" multi>
+            <mat-expansion-panel *ngFor="let user of user">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  <mat-icon>account_circle</mat-icon>
+                  <div class="space-mat-panel">
+                    {{ user.fullName }}
+                  </div>
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+          
+              <p><strong>Email:</strong> {{ user.email }}</p>
+              <p><strong>Role:</strong> {{ user.role }}</p>
+              <p>
+                <strong>Registration Date:</strong>
+                {{ user.createdAt | date : "fullDate" }}
+              </p>
+              <p><strong>Status:</strong> {{ user.active ? "Active" : "Inactive" }}</p>
+            </mat-expansion-panel>
+        </mat-accordion>
+
+    </mat-expansion-panel>
+</mat-accordion>
+
+<div *ngIf="!user.length">
+  <p>Loading user data...</p>
+</div>

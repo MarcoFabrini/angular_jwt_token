@@ -1,31 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable, of } from 'rxjs';
-import { catchError, map, tap } from 'rxjs/operators';
+import { BehaviorSubject, firstValueFrom, Observable, of } from 'rxjs';
+import { catchError, tap } from 'rxjs/operators';
 
-interface LoginRequest {
-  email: string;
-  password: string;
-}
-
-interface LoginResponse {
-  token: string;
-  expiresIn: number;
-  description?: string;
-} // LoginResponse
-
-interface SignupRequest {
-  email: string;
-  password: string;
-  fullName: string;
-} // SignupRequest
-
-interface SignupResponse {
-  id: number;
-  email: string;
-  fullName: string;
-  active: boolean;
-}
+// interface
+import { User } from '../models/user';
+import { LoginRequest } from '../models/login-request';
+import { LoginResponse } from '../models/login-response';
+import { SignupRequest } from '../models/signup-request';
+import { SignupResponse } from '../models/signup-response';
 
 @Injectable({
   providedIn: 'root',
@@ -38,7 +21,10 @@ export class AuthService {
   );
   isAuthenticated$ = this.isAuthenticatedSubject.asObservable();
 
-  private currentUserSubject = new BehaviorSubject<any>(null);
+  private isAdminSubject = new BehaviorSubject<boolean>(false);
+  isAdmin$ = this.isAdminSubject.asObservable();
+
+  private currentUserSubject = new BehaviorSubject<User | null>(null);
   currentUser$ = this.currentUserSubject.asObservable();
 
   constructor(private http: HttpClient) {
@@ -63,27 +49,23 @@ export class AuthService {
       );
   } // loginUser
 
-  getAuthenticatedUser(): void {
-    this.http
-      .get<any>(this.API_URL + "/user/users/getAuthenticatedUser")
-      .pipe(
-        tap((response) => {
-          console.log('User data received: ', response);
-          this.currentUserSubject.next(response);
-        }),
-        catchError((error) => {
-          console.error('Error in retrieving user data: ', error);
-          this.logout();
-          return of(null);
-        })
+  getAuthenticatedUser(): Promise<User> {
+    return firstValueFrom(
+      this.http.get<User>(
+        this.API_URL + '/user/users/getAuthenticatedUser'
       )
-      .subscribe();
+    ).then((user) => {
+      this.currentUserSubject.next(user);
+      this.isAdminSubject.next(this.isAdmin(user));
+      return user;
+    });
   } // getAuthenticatedUser
 
   logout() {
     localStorage.removeItem('authToken');
     this.isAuthenticatedSubject.next(false);
     this.currentUserSubject.next(null);
+    this.isAdminSubject.next(false);
   } // logout
 
   signupUser(signupData: SignupRequest): Observable<SignupResponse> {
@@ -109,9 +91,7 @@ export class AuthService {
       return false;
     }
 
-    const token = localStorage.getItem('authToken');
-
-    if (!token) return false;
+    if (!this.getAuthorizationToken()) return false;
 
     return true;
   } // hasValidToken
@@ -120,9 +100,7 @@ export class AuthService {
     return localStorage.getItem('authToken') || '';
   } // getAuthorizationToken
 
-  isAdmin(): Observable<boolean> {
-    return this.currentUser$.pipe(
-      map((user) => !!user?.authorities?.includes('ROLE_ADMIN'))
-    );
+  private isAdmin(user: User): boolean {
+    return user.role.includes('ROLE_ADMIN');
   } // isAdmin
-}// service
+} // service

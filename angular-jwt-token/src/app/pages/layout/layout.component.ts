@@ -1,6 +1,8 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-layout',
@@ -9,21 +11,19 @@ import { AuthService } from '../../services/auth.service';
   styleUrl: './layout.component.scss',
 })
 export class LayoutComponent implements OnInit {
-  router = inject(Router);
-  authService = inject(AuthService);
-
   isLoggedIn: boolean = false;
   isAdmin: boolean = false;
   opened: boolean = false;
   menuTooltip: string = 'Open menu';
 
+  constructor(private authService: AuthService, private router: Router) {}
+
   ngOnInit(): void {
     // Sottoscrive al BehaviorSubject per aggiornare la navbar dinamicamente
     this.authService.isAuthenticated$.subscribe((isAuth) => {
       this.isLoggedIn = isAuth;
-
       // Controlla se l'utente è admin
-      this.authService.isAdmin().subscribe((isAdmin) => {
+      this.authService.isAdmin$.subscribe((isAdmin) => {
         this.isAdmin = isAdmin;
       });
     });

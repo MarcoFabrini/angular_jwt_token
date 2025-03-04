@@ -1,8 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { combineLatest } from 'rxjs';
 
 @Component({
   selector: 'app-layout',
@@ -19,13 +18,13 @@ export class LayoutComponent implements OnInit {
   constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {
-    // Sottoscrive al BehaviorSubject per aggiornare la navbar dinamicamente
-    this.authService.isAuthenticated$.subscribe((isAuth) => {
-      this.isLoggedIn = isAuth;
-      // Controlla se l'utente è admin
-      this.authService.isAdmin$.subscribe((isAdmin) => {
-        this.isAdmin = isAdmin;
-      });
+    // Combina isAuthenticated$ e isAdmin$ in un'unica sottoscrizione
+    combineLatest([
+      this.authService.isAuthenticated$, // Stream di autenticazione
+      this.authService.isAdmin$, // Stream di ruolo admin
+    ]).subscribe(([isAuth, isAdmin]) => {
+      this.isLoggedIn = isAuth; // Aggiorna lo stato di autenticazione
+      this.isAdmin = isAdmin; // Aggiorna lo stato di admin
     });
   } // ngOnInit
 

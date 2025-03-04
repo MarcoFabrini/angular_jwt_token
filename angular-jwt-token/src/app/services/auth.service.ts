@@ -21,7 +21,7 @@ export class AuthService {
   );
   isAuthenticated$ = this.isAuthenticatedSubject.asObservable();
 
-  private isAdminSubject = new BehaviorSubject<boolean>(false);
+  public isAdminSubject = new BehaviorSubject<boolean>(false);
   isAdmin$ = this.isAdminSubject.asObservable();
 
   private currentUserSubject = new BehaviorSubject<User | null>(null);

@@ -25,7 +25,7 @@ export class AdminGuard implements CanActivate {
           return false;
         } else {
           if (this.authService.isAdminSubject.value) {
-            return true; // Permetti l'accesso
+            return true;
           } else {
             this.router.navigate(['/dashboard/home']);
             return false;

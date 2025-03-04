@@ -1,4 +1,3 @@
-
 <mat-accordion class="headers-align" multi>
     <mat-expansion-panel>
         <mat-expansion-panel-header>
@@ -11,7 +10,7 @@
         </mat-expansion-panel-header>
 
         <mat-accordion class="headers-align" multi>
-            <mat-expansion-panel *ngFor="let user of user">
+            <mat-expansion-panel *ngFor="let user of listUser">
               <mat-expansion-panel-header>
                 <mat-panel-title>
                   <mat-icon>account_circle</mat-icon>
@@ -34,6 +33,6 @@
     </mat-expansion-panel>
 </mat-accordion>
 
-<div *ngIf="!user.length">
+<div *ngIf="!listUser.length">
   <p>Loading user data...</p>
 </div>

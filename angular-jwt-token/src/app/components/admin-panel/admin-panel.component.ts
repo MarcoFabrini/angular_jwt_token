@@ -11,7 +11,7 @@ import { AdminService } from '../../services/api/admin.service';
 })
 export class AdminPanelComponent implements OnInit {
   accordion = viewChild.required(MatAccordion);
-  user: User[] = [];
+  listUser: User[] = [];
 
   constructor(private adminService: AdminService) {}
 
@@ -21,12 +21,10 @@ export class AdminPanelComponent implements OnInit {
 
   loadAllUsers() {
     this.adminService.listAllUsers().then(users => {
-      this.user = users;
+      this.listUser = users;
     }).catch(error => {
-      console.error('Failed to load users', error);
+      console.error('Failed to load listUser', error);
     });
-  }
-
-
+  }// loadAllUsers
 
 } // class

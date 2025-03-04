@@ -9,6 +9,8 @@ import { HomeComponent } from './components/home/home.component';
 import { ProvaComponent } from './components/prova/prova.component';
 import { UserOptionsComponent } from './components/user-options/user-options.component';
 import { AdminPanelComponent } from './components/admin-panel/admin-panel.component';
+import { AuthGuard } from './services/guards/auth.guard';
+import { AdminGuard } from './services/guards/admin.guard';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: '/dashboard/home' },
@@ -22,8 +24,8 @@ const routes: Routes = [
       { path: 'dashboard', component: DashboardComponent, 
         children: [
           // components
-          { path: 'admin', component: AdminPanelComponent },
-          { path: 'user', component: UserOptionsComponent },
+          { path: 'admin', component: AdminPanelComponent, canActivate: [AdminGuard]},
+          { path: 'user', component: UserOptionsComponent, canActivate: [AuthGuard]},
           { path: 'home', component: HomeComponent },
           { path: 'prova', component: ProvaComponent },
         ],

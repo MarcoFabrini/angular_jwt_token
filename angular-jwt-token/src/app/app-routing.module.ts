@@ -4,7 +4,7 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { LayoutComponent } from './pages/layout/layout.component';
 import { LoginComponent } from './components/login/login.component';
 import { SignupComponent } from './components/signup/signup.component';
-import { NotFoundComponent } from './pages/not-found/not-found.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 import { HomeComponent } from './components/home/home.component';
 import { ProvaComponent } from './components/prova/prova.component';
 import { UserOptionsComponent } from './components/user-options/user-options.component';

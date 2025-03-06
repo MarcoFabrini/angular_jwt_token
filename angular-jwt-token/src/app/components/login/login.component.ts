@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { LoginRequest } from '../../models/login-request';
 
 @Component({
   selector: 'app-login',
@@ -15,10 +16,9 @@ export class LoginComponent {
   errorMsg: string | null = null;
   isLoading: boolean = false;
 
-  loginObj = {
-    email: '',
-    password: '',
-  };
+  constructor(){}
+
+  loginObj: LoginRequest = {email: '', password: ''};
 
   onLogin() {
     this.isLoading = true;
@@ -42,4 +42,4 @@ export class LoginComponent {
   navigateToSignup() {
     this.router.navigate(['/signup']);
   }
-}
+}// class 

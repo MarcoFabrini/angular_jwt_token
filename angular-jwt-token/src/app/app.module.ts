@@ -28,7 +28,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { HomeComponent } from './components/home/home.component';
-import { NotFoundComponent } from './pages/not-found/not-found.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 import { ProvaComponent } from './components/prova/prova.component';
 import { UserOptionsComponent } from './components/user-options/user-options.component';
 import { AdminPanelComponent } from './components/admin-panel/admin-panel.component';
